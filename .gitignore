@@ -1,0 +1,30 @@
+# Dependências
+node_modules/
+
+# Build (gerado pelo react-router build)
+/build/
+
+# React Router (typegen, gerado automaticamente)
+.react-router/
+
+# Vite
+.vite/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Cache do Sass
+.sass-cache/
+
+# Editor
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*

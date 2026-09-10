@@ -14,3 +14,7 @@ Notas:
 - **Responsáveis:** contato principal para cada etapa.
 - **Datas:** prazos previstos.
 - **Documentação:** deve ser produzida continuamente e atualizada ao final de cada etapa.
+
+# Links externos
+
+- **Figma:** [Amplia Info no Figma](https://www.figma.com/design/gzkIDD5q59NoByAulHWx67/Layout-AmpliaInfo?node-id=0-1&t=fUjZP4F9qyhlEGV4-0)
