@@ -78,7 +78,7 @@ const categories = [
   { title: "Financeiro", Icon: DollarIcon, to: "/financeiro" },
   { title: "Empresarial", Icon: BuildingIcon },
   { title: "Propriedade", Icon: HomeIcon },
-  { title: "Geografia", Icon: GlobeIcon },
+  { title: "Geografia", Icon: GlobeIcon, to: "/geografico" },
   { title: "Saúde", Icon: HeartIcon },
   { title: "Geral", Icon: FileIcon },
 ];

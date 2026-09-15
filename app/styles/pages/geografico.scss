@@ -1,6 +1,6 @@
 @use "../variables" as *;
 
-.financial-page {
+.geografico-page {
   min-height: 448px;
   background: $color-surface;
 }
@@ -29,7 +29,7 @@
   }
 }
 
-.financial-services {
+.geografico-services {
   padding-block: 26px 96px;
 
   .section-heading {
@@ -68,7 +68,7 @@
   }
 }
 
-.financial-service-card {
+.geografico-service-card {
   min-height: 168px;
   display: flex;
   flex-direction: column;
@@ -144,7 +144,7 @@
 }
 
 @media (max-width: 700px) {
-  .financial-services {
+  .geografico-services {
     padding-block: 20px 64px;
 
     .section-heading {
@@ -169,7 +169,7 @@
     font-size: 12px;
   }
 
-  .financial-service-card {
+  .geografico-service-card {
     padding: 16px;
 
     &__header h2 {
