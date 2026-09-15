@@ -1,15 +1,13 @@
-import { Outlet, NavLink } from "react-router";
+import { Outlet } from "react-router";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Layout() {
   return (
-    <>
-      <nav>
-        <NavLink to="/" end>
-          Home
-        </NavLink>
-        <NavLink to="/sobre">Sobre</NavLink>
-      </nav>
+    <div className="app-shell">
+      <Navbar />
       <Outlet />
-    </>
+      <Footer />
+    </div>
   );
 }

@@ -1,0 +1,85 @@
+@use "../variables" as *;
+
+.site-footer {
+  color: $color-white;
+  background: $color-navy-deep;
+
+  h2 {
+    margin: 0 0 13px;
+    color: $color-white;
+    font-size: 14px;
+    font-weight: 750;
+    text-transform: uppercase;
+  }
+
+  p,
+  li {
+    color: $color-muted;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
+.footer {
+  &-content {
+    display: grid;
+    grid-template-columns: 2.4fr 1.45fr 1.7fr 1fr;
+    gap: 48px;
+    padding-block: 62px 66px;
+  }
+
+  &-brand {
+    h2 {
+      font-size: 20px;
+      text-transform: none;
+      letter-spacing: -0.6px;
+    }
+
+    p {
+      max-width: 295px;
+      margin: 0;
+    }
+  }
+
+  &-links {
+    ul {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    a:hover {
+      color: $color-white;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .footer {
+    &-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &-brand {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .footer {
+    &-content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-block: 45px;
+    }
+
+    &-brand {
+      grid-column: auto;
+    }
+  }
+}

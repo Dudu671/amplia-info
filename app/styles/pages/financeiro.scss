@@ -1,0 +1,179 @@
+@use "../variables" as *;
+
+.financial-page {
+  min-height: 448px;
+  background: $color-surface;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 12px 16px;
+  color: #718096;
+  font-size: 13px;
+
+  a {
+    color: $color-cyan;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  strong {
+    color: #1a202c;
+    font-weight: 600;
+  }
+}
+
+.financial-services {
+  padding-block: 26px 96px;
+
+  .section-heading {
+    margin-bottom: 24px;
+
+    h1 {
+      margin: 0;
+      color: $color-navy;
+      font-size: 32px;
+      font-weight: 750;
+      line-height: 1.2;
+      letter-spacing: -0.6px;
+    }
+
+    p {
+      margin: 12px 0 0;
+      color: #4a5568;
+      font-size: 16px;
+
+      &::after {
+        width: 64px;
+        height: 4px;
+        display: block;
+        margin-top: 9px;
+        content: "";
+        background: $color-cyan;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 24px;
+  }
+}
+
+.financial-service-card {
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 24px;
+  color: inherit;
+  background: $color-white;
+  border: 1px solid #d2d6dc;
+  border-radius: 12px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+
+  &:hover {
+    border-color: rgba($color-cyan, 0.65);
+    box-shadow: 0 8px 20px rgba($color-navy, 0.09);
+    transform: translateY(-2px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    h2 {
+      margin: 0;
+      overflow: hidden;
+      color: $color-navy;
+      font-size: 18px;
+      font-weight: 750;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__icon {
+    width: 48px;
+    height: 32px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    background: #e8f1f5;
+    border-radius: $radius-sm;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  > p {
+    margin: 0;
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 2px;
+    color: $color-cyan;
+    font-size: 13px;
+    font-weight: 750;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .financial-services {
+    padding-block: 20px 64px;
+
+    .section-heading {
+      h1 {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+
+    &-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .breadcrumb {
+    padding-block: 10px 12px;
+    font-size: 12px;
+  }
+
+  .financial-service-card {
+    padding: 16px;
+
+    &__header h2 {
+      font-size: 16px;
+    }
+  }
+}
