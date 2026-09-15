@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 import "../styles/pages/financeiro.scss";
 
+import ServiceCard from "../components/ServiceCard";
+
 import CoinsIcon from "../../public/assets/financeiro/coins.svg?react";
 import CarIcon from "../../public/assets/financeiro/car.svg?react";
 import BuildingIcon from "../../public/assets/financeiro/building.svg?react";
@@ -8,24 +10,28 @@ import LockIcon from "../../public/assets/financeiro/lock.svg?react";
 
 const services = [
   {
+    id: 1,
     title: "Câmbio Comercial",
     description:
       "Verifique as taxas de câmbio atualizadas em tempo real para conversão de moedas estrangeiras oficiais.",
     Icon: CoinsIcon,
   },
   {
+    id: 2,
     title: "Tabela FIPE",
     description:
       "Consulte o preço médio de mercado de carros, motos e caminhões novos ou usados cadastrados no Brasil.",
     Icon: CarIcon,
   },
   {
+    id: 3,
     title: "Corretoras de Valores",
     description:
       "Consulte a listagem e a situação de autorização de corretoras e distribuidoras habilitadas pela CVM.",
     Icon: BuildingIcon,
   },
   {
+    id: 4,
     title: "Bancos e Instituições",
     description:
       "Verifique a lista de bancos cadastrados, códigos de compensação bancária e instituições financeiras ativas.",
@@ -66,20 +72,13 @@ export default function Financeiro() {
         </header>
 
         <div className="financial-services-grid">
-          {services.map(({ title, description, Icon }) => (
-            <a className="financial-service-card" href="#" key={title}>
-              <div className="financial-service-card__header">
-                <span className="financial-service-card__icon">
-                  <Icon />
-                </span>
-                <h2>{title}</h2>
-              </div>
-              <p>{description}</p>
-              <span className="financial-service-card__action">
-                Acessar consulta
-                <img src="/assets/financeiro/chevron-right.svg" alt="" />
-              </span>
-            </a>
+          {services.map(({ id, title, Icon, description }) => (
+            <ServiceCard
+              key={id}
+              title={title}
+              Icon={Icon}
+              description={description}
+            />
           ))}
         </div>
       </section>
