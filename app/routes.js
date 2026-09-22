@@ -5,5 +5,6 @@ export default [
     index("pages/home.jsx"),
     route("financeiro", "pages/financeiro.jsx"),
     route("sobre", "pages/sobre.jsx"),
+    route("empresarial", "pages/empresarial.jsx"),
   ]),
 ];
