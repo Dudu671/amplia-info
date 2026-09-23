@@ -1,0 +1,209 @@
+@use "../variables" as *;
+
+.cnpj-page {
+  min-height: 700px;
+  color: $color-navy;
+  background: $color-surface;
+}
+
+.cnpj-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 16px;
+  color: #718096;
+  font-size: 13px;
+
+  a {
+    color: $color-cyan;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  strong {
+    color: #1a202c;
+    font-weight: 600;
+  }
+}
+
+.cnpj-consultation {
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding-block: 64px 97px;
+}
+
+.cnpj-heading {
+  width: min(800px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+
+  h1 {
+    margin: 0;
+    color: #13315c;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.6px;
+  }
+
+  p {
+    margin: 0;
+    color: #718096;
+    font-size: 16px;
+    line-height: normal;
+  }
+}
+
+.cnpj-form {
+  width: min(600px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px;
+  background: $color-white;
+  border: 1px solid #d2d6dc;
+  border-radius: 16px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  button {
+    min-height: 52px;
+    padding: 16px;
+    color: $color-white;
+    background: #13315c;
+    border: 0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: #0b2545;
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba($color-cyan, 0.35);
+      outline-offset: 2px;
+    }
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background: #d2d6dc;
+  }
+}
+
+.cnpj-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    color: #13315c;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-height: 52px;
+    padding: 16px;
+    color: #1a202c;
+    background-color: $color-white;
+    border: 1px solid #d2d6dc;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: normal;
+    outline: none;
+
+    &::placeholder {
+      color: #718096;
+      opacity: 1;
+    }
+
+    &:focus {
+      border-color: $color-cyan;
+      box-shadow: 0 0 0 3px rgba($color-cyan, 0.14);
+    }
+  }
+
+  select {
+    appearance: none;
+    padding-right: 48px;
+    color: #718096;
+    background-image: url("/assets/consulta-cnpj/select-chevron.svg");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 8px 4px;
+    cursor: pointer;
+
+    &.has-value {
+      color: #1a202c;
+    }
+  }
+}
+
+.cnpj-security {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: #718096;
+  font-size: 13px;
+  line-height: normal;
+
+  img {
+    width: 12px;
+    height: 14px;
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .cnpj-page .breadcrumb {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .cnpj-consultation {
+    min-height: auto;
+    gap: 32px;
+    padding-block: 40px 64px;
+  }
+
+  .cnpj-heading {
+    h1 {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  .cnpj-form {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 460px) {
+  .cnpj-form {
+    padding: 24px 16px;
+  }
+
+  .cnpj-security {
+    align-items: flex-start;
+  }
+}

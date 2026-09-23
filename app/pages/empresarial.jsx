@@ -13,6 +13,7 @@ const services = [
         description:
             "Verifique dados cadastrais de pessoas jurídicas diretamente na base oficial da Receita Federal do Brasil.",
         Icon: BuildingIcon,
+        to: "/empresarial/consulta-cnpj",
     },
     {
         id: 2,
@@ -59,12 +60,13 @@ export default function Empresarial() {
                 </header>
 
                 <div className="business-services-grid">
-                    {services.map(({ id, title, description, Icon }) => (
+                    {services.map(({ id, title, description, Icon, to }) => (
                         <ServiceCard
                             key={id}
                             title={title}
                             description={description}
                             Icon={Icon}
+                            to={to}
                         />
                     ))}
                 </div>
