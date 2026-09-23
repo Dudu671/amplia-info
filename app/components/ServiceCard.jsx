@@ -1,8 +1,9 @@
+import { Link } from "react-router";
 import "../styles/components/service-card.scss";
 
-export default function ServiceCard({ title, Icon, description }) {
+export default function ServiceCard({ title, Icon, description, to = "#" }) {
   return (
-    <a className="service-card" href="#" key={title}>
+    <Link className="service-card" to={to}>
       <div className="service-card__header">
         <span className="service-card__icon">
           <Icon />
@@ -14,6 +15,6 @@ export default function ServiceCard({ title, Icon, description }) {
         Acessar consulta
         <img src="/assets/financeiro/chevron-right.svg" alt="" />
       </span>
-    </a>
+    </Link>
   );
 }
