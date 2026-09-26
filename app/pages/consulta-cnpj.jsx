@@ -4,8 +4,7 @@ import "../styles/pages/consulta-cnpj.scss";
 
 import states from "../utils/states.json"
 
-// React Router lê este export junto ao componente da rota.
-// eslint-disable-next-line react-refresh/only-export-components
+
 export function meta() {
     return [
         { title: "AmpliaInfo — Consulta CNPJ" },
