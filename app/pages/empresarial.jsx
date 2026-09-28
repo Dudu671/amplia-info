@@ -21,6 +21,7 @@ const services = [
         description:
             "Consulte a disponibilidade de nomes de domínio, titularidade e status de registro com extensão '.br'.",
         Icon: GlobeIcon,
+        to: "/empresarial/consulta-dominio",
     },
 ];
 
