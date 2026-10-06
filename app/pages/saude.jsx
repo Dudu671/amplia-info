@@ -11,6 +11,7 @@ const services = [
         title: "Hospitais e Unidades",
         description: "Encontre hospitais públicos, postos de saúde, UPAs e demais unidades de atendimento do SUS em todo o território nacional.",
         Icon: HospitalIcon,
+        to: "/saude/hospitais",
     }
 ];
 
@@ -52,12 +53,13 @@ export default function Saude() {
                 </header>
 
                 <div className="health-services-grid">
-                    {services.map(({ id, title, description, Icon }) => (
+                    {services.map(({ id, title, description, Icon, to }) => (
                         <ServiceCard
                             key={id}
                             title={title}
                             description={description}
                             Icon={Icon}
+                            to={to}
                         />
                     ))}
                 </div>

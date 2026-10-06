@@ -1,0 +1,73 @@
+@use "../variables" as *;
+
+.hospital-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: $color-white;
+  border: 1px solid #d2d6dc;
+  border-radius: 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    flex: 0 0 40px;
+    place-items: center;
+    background: #e8f1f5;
+    border-radius: 50%;
+  }
+
+  &__heading {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+
+    h3 {
+      margin: 0;
+      color: #13315c;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  &__tag {
+    padding: 2px 8px;
+    color: #4a5568;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    background: $color-surface;
+    border-radius: 4px;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4a5568;
+    font-size: 13px;
+    line-height: normal;
+
+    span {
+      min-width: 0;
+    }
+  }
+}

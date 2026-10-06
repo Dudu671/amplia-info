@@ -85,9 +85,9 @@ export default function ConsultaCnpj() {
                             <option value="" disabled>
                                 Selecione o estado
                             </option>
-                            {states.map((state) => (
-                                <option key={state} value={state}>
-                                    {state}
+                            {states.map(({ value, label }) => (
+                                <option key={value} value={value}>
+                                    {label}
                                 </option>
                             ))}
                         </select>

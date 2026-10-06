@@ -9,5 +9,6 @@ export default [
     route("empresarial/consulta-cnpj", "pages/consulta-cnpj.jsx"),
     route("empresarial/consulta-dominio", "pages/consulta-dominio.jsx"),
     route("saude", "pages/saude.jsx"),
+    route("saude/hospitais", "pages/hospitais.jsx"),
   ]),
 ];
