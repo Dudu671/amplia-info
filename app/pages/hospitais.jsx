@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Dropdown from "../components/Dropdown";
 import HospitalCard from "../components/HospitalCard";
-import { getCitiesByState, searchHospitais } from "../services/hospitais";
+import { searchHospitais } from "../services/hospitais";
+import { getCitiesByState } from "../services/cidades";
 import states from "../utils/states.json";
 import "../styles/pages/hospitais.scss";
 
