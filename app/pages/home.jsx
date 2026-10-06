@@ -79,6 +79,6 @@ const categories = [
   { title: "Empresarial", Icon: BuildingIcon, to: "/empresarial" },
   { title: "Propriedade", Icon: HomeIcon },
   { title: "Geografia", Icon: GlobeIcon },
-  { title: "Saúde", Icon: HeartIcon },
+  { title: "Saúde", Icon: HeartIcon, to: "/saude" },
   { title: "Geral", Icon: FileIcon },
 ];
