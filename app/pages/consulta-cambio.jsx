@@ -20,7 +20,7 @@ export default function ConsultaCambio() {
     return (
         <ConsultationPage title="Consulta de Câmbio" description="Consulte taxas de câmbio entre moedas em tempo real."
             breadcrumbs={[{ label: "Financeiro", to: "/financeiro" }, { label: "Câmbio" }]}>
-            <ConsultationForm buttonLabel="Consultar">
+            <ConsultationForm buttonLabel="Consultar" disabled={!currency}>
                 <ConsultationField id="currency" label="Moeda de origem:">
                     <Dropdown id="currency" name="currency" value={currency} options={currencyOptions}
                         placeholder="Selecione a moeda" icon="/assets/financeiro/coins.svg" onChange={setCurrency} />

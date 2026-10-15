@@ -27,21 +27,17 @@ export default function Hospitais() {
     const [cityStatus, setCityStatus] = useState("idle");
     const [hospitals, setHospitals] = useState([]);
     const [status, setStatus] = useState("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        if (!filters.state) {
-            setCities([]);
-            setCityStatus("idle");
-            return;
-        }
+        if (!filters.state) return;
 
         const controller = new AbortController();
 
         async function loadCities() {
-            setCityStatus("loading");
-
             try {
                 const results = await getCitiesByState(filters.state, controller.signal);
+                if (controller.signal.aborted) return;
                 setCities(results);
                 setCityStatus("success");
             } catch (error) {
@@ -61,7 +57,9 @@ export default function Hospitais() {
     }
 
     function handleStateChange(state) {
+        if (state === filters.state) return;
         setCities([]);
+        setCityStatus(state ? "loading" : "idle");
         setFilters((currentFilters) => ({ ...currentFilters, state, city: "" }));
     }
 
@@ -71,14 +69,18 @@ export default function Hospitais() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        if (status === "loading") return;
         setStatus("loading");
+        setHospitals([]);
+        setErrorMessage("");
 
         try {
             const results = await searchHospitais(filters);
             setHospitals(results);
             setStatus("success");
-        } catch {
+        } catch (error) {
             setHospitals([]);
+            setErrorMessage(error.message);
             setStatus("error");
         }
     }
@@ -134,7 +136,7 @@ export default function Hospitais() {
                             {hospitals.map((hospital, index) => <HospitalCard key={hospital.id ?? hospital.cnes ?? index} hospital={hospital} />)}
                         </div>
                     ) : (
-                        <p className={`hospitais-results__empty${status === "error" ? " hospitais-results__empty--error" : ""}`}>{statusMessages[status]}</p>
+                        <p className={`hospitais-results__empty${status === "error" ? " hospitais-results__empty--error" : ""}`}>{status === "error" ? errorMessage : statusMessages[status]}</p>
                     )}
                 </section>
             </section>

@@ -63,7 +63,7 @@
     line-height: normal;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
         background: $color-navy-deep;
     }
 
@@ -71,6 +71,18 @@
         outline: 3px solid rgba($color-cyan, 0.35);
         outline-offset: 2px;
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+.consultation-notice {
+    margin: 0;
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .consultation-field {
@@ -87,7 +99,6 @@
     }
 
     > input,
-    > select,
     .consultation-input input {
         width: 100%;
         min-width: 0;
@@ -118,19 +129,6 @@
         padding: 16px;
         border-radius: 8px;
         font-size: 16px;
-    }
-
-    select {
-        appearance: none;
-        padding-right: 48px;
-        background-image: url("/assets/consultation/select-chevron.svg");
-        background-repeat: no-repeat;
-        background-position: right 16px center;
-        cursor: pointer;
-
-        &:invalid {
-            color: #718096;
-        }
     }
 }
 
@@ -166,7 +164,6 @@
             box-shadow: none;
         }
     }
-
 }
 
 .consultation-security {
