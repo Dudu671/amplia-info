@@ -1,4 +1,4 @@
-export default function ConsultationForm({ children, buttonLabel, onSubmit, includeLgpd = false }) {
+export default function ConsultationForm({ children, buttonLabel, onSubmit, disabled = false, includeLgpd = false }) {
     function handleSubmit(event) {
         event.preventDefault();
         onSubmit?.(event);
@@ -7,7 +7,8 @@ export default function ConsultationForm({ children, buttonLabel, onSubmit, incl
     return (
         <form className="consultation-form" onSubmit={handleSubmit}>
             {children}
-            <button className="consultation-submit" type="submit">{buttonLabel}</button>
+            <button className="consultation-submit" type="submit" disabled={disabled || !onSubmit}>{buttonLabel}</button>
+            {!onSubmit && <p className="consultation-notice" role="status">Esta consulta estará disponível em breve.</p>}
             <div className="consultation-form__divider" aria-hidden="true" />
             <p className="consultation-security">
                 <span className="consultation-security__icon" aria-hidden="true">

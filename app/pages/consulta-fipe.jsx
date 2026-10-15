@@ -2,6 +2,7 @@ import { useState } from "react";
 import ConsultationPage from "../components/ConsultationPage";
 import ConsultationForm from "../components/ConsultationForm";
 import ConsultationField from "../components/ConsultationField";
+import Dropdown from "../components/Dropdown";
 
 const vehicleTypes = [
     { value: "carros", label: "Carros" },
@@ -24,25 +25,18 @@ export default function ConsultaFipe() {
             breadcrumbs={[{ label: "Financeiro", to: "/financeiro" }, { label: "Consulta FIPE" }]}>
             <ConsultationForm buttonLabel="Consultar FIPE" includeLgpd>
                 <ConsultationField id="vehicle-type" label="Tipo de veículo">
-                    <select id="vehicle-type" name="vehicleType" value={vehicleType} onChange={(event) => setVehicleType(event.target.value)} required>
-                        <option value="" disabled>Selecione o tipo de veículo</option>
-                        {vehicleTypes.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
-                    </select>
+                    <Dropdown id="vehicle-type" name="vehicleType" value={vehicleType} options={vehicleTypes}
+                        placeholder="Selecione o tipo de veículo" onChange={setVehicleType} />
                 </ConsultationField>
                 <ConsultationField id="vehicle-brand" label="Marca do veículo">
-                    <select id="vehicle-brand" name="brand" defaultValue="" required>
-                        <option value="" disabled>Selecione a marca</option>
-                    </select>
+                    <Dropdown id="vehicle-brand" name="brand" value="" options={[]} disabled
+                        placeholder={vehicleType ? "Marcas indisponíveis no momento" : "Selecione primeiro o tipo de veículo"} />
                 </ConsultationField>
                 <ConsultationField id="vehicle-model" label="Modelo">
-                    <select id="vehicle-model" name="model" defaultValue="" required>
-                        <option value="" disabled>Selecione o modelo</option>
-                    </select>
+                    <Dropdown id="vehicle-model" name="model" value="" options={[]} disabled placeholder="Selecione primeiro a marca" />
                 </ConsultationField>
                 <ConsultationField id="vehicle-year" label="Ano">
-                    <select id="vehicle-year" name="year" defaultValue="" required>
-                        <option value="" disabled>Selecione o ano modelo</option>
-                    </select>
+                    <Dropdown id="vehicle-year" name="year" value="" options={[]} disabled placeholder="Selecione primeiro o modelo" />
                 </ConsultationField>
             </ConsultationForm>
         </ConsultationPage>

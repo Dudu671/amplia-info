@@ -2,9 +2,6 @@ import { useState } from "react";
 import ConsultationPage from "../components/ConsultationPage";
 import ConsultationForm from "../components/ConsultationForm";
 import ConsultationField from "../components/ConsultationField";
-import BankResult from "../components/BankResult";
-
-const exampleBank = { name: "Exemplo S.A.", code: "341", ispb: "60701190" };
 
 export function meta() {
     return [
@@ -25,7 +22,6 @@ export default function ConsultaBancos() {
                         placeholder="Digite o nome ou código do banco" autoComplete="off" required />
                 </ConsultationField>
             </ConsultationForm>
-            <BankResult bank={exampleBank} preview />
         </ConsultationPage>
     );
 }
