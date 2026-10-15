@@ -5,7 +5,7 @@ function normalizeText(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-export default function Dropdown({ id, name, value, options, placeholder, disabled = false, onChange }) {
+export default function Dropdown({ id, name, value, options, placeholder, disabled = false, onChange, icon }) {
     const generatedId = useId();
     const controlId = id ?? generatedId;
     const menuId = `${controlId}-options`;
@@ -118,8 +118,9 @@ export default function Dropdown({ id, name, value, options, placeholder, disabl
             <input type="hidden" name={name} value={value} />
 
             <button id={controlId} type="button" className={`dropdown__trigger${selectedOption ? "" : " dropdown__trigger--placeholder"}`} aria-haspopup="listbox" aria-expanded={isOpen} aria-controls={menuId} disabled={disabled} onClick={() => isOpen ? closeMenu() : openMenu()} onKeyDown={handleTriggerKeyDown}>
+                {icon && <img src={icon} alt="" aria-hidden="true" />}
                 <span>{selectedOption?.label ?? placeholder}</span>
-                <img src="/assets/saude/hospitais/select-chevron.svg" alt="" aria-hidden="true" />
+                <img className="dropdown__chevron" src="/assets/saude/hospitais/select-chevron.svg" alt="" aria-hidden="true" />
             </button>
 
             {isOpen && (

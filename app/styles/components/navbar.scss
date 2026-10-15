@@ -74,11 +74,28 @@
 }
 
 @media (max-width: 600px) {
+  .site-header .navbar {
+    flex-wrap: wrap;
+    column-gap: 24px;
+  }
+
+  .brand {
+    flex-shrink: 0;
+  }
+
   .navbar-links {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 48px;
     gap: 18px;
 
     a {
+      min-height: 48px;
       font-size: 13px;
+
+      &.active::after {
+        bottom: 10px;
+      }
     }
   }
 }

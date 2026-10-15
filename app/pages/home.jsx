@@ -4,10 +4,8 @@ import "../styles/pages/home.scss";
 import SearchIcon from "../../public/assets/home/search.svg?react";
 import DollarIcon from "../../public/assets/home/dollar.svg?react";
 import BuildingIcon from "../../public/assets/home/building.svg?react";
-import HomeIcon from "../../public/assets/home/home.svg?react";
 import GlobeIcon from "../../public/assets/home/globe.svg?react";
 import HeartIcon from "../../public/assets/home/heart.svg?react";
-import FileIcon from "../../public/assets/home/file.svg?react";
 
 export function meta() {
   return [
@@ -77,8 +75,6 @@ export default function Home() {
 const categories = [
   { title: "Financeiro", Icon: DollarIcon, to: "/financeiro" },
   { title: "Empresarial", Icon: BuildingIcon, to: "/empresarial" },
-  { title: "Propriedade", Icon: HomeIcon },
   { title: "Geografia", Icon: GlobeIcon },
   { title: "Saúde", Icon: HeartIcon, to: "/saude" },
-  { title: "Geral", Icon: FileIcon },
 ];
