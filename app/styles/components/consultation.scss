@@ -1,0 +1,220 @@
+@use "../variables" as *;
+
+.consultation-page {
+    color: $color-navy;
+    background: #f4f7fa;
+}
+
+.consultation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-block: 64px;
+}
+
+.consultation-heading {
+    width: min(800px, 100%);
+    text-align: center;
+
+    h1 {
+        margin: 0;
+        color: #13315c;
+        font-size: 36px;
+        font-weight: 800;
+        line-height: normal;
+    }
+
+    p {
+        margin: 12px 0 0;
+        color: #4a5568;
+        font-size: 16px;
+        line-height: normal;
+    }
+}
+
+.consultation-form {
+    width: min(600px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 48px;
+    background: $color-white;
+    border: 1px solid #d2d6dc;
+    border-radius: 16px;
+
+    &__divider {
+        width: 100%;
+        height: 1px;
+        background: #d2d6dc;
+    }
+}
+
+.consultation-submit {
+    min-height: 52px;
+    padding: 16px;
+    color: $color-white;
+    background: #13315c;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+
+    &:hover {
+        background: $color-navy-deep;
+    }
+
+    &:focus-visible {
+        outline: 3px solid rgba($color-cyan, 0.35);
+        outline-offset: 2px;
+    }
+}
+
+.consultation-field {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        color: #13315c;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    > input,
+    > select,
+    .consultation-input input {
+        width: 100%;
+        min-width: 0;
+        min-height: 52px;
+        padding: 16px;
+        color: #1a202c;
+        background-color: $color-white;
+        border: 1px solid #d2d6dc;
+        border-radius: 8px;
+        font: inherit;
+        font-size: 16px;
+        line-height: normal;
+
+        &::placeholder {
+            color: #718096;
+            opacity: 1;
+        }
+
+        &:focus {
+            border-color: $color-cyan;
+            box-shadow: 0 0 0 3px rgba($color-cyan, 0.14);
+            outline: none;
+        }
+    }
+
+    .dropdown__trigger {
+        min-height: 52px;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    select {
+        appearance: none;
+        padding-right: 48px;
+        background-image: url("/assets/consultation/select-chevron.svg");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        cursor: pointer;
+
+        &:invalid {
+            color: #718096;
+        }
+    }
+}
+
+.consultation-field .consultation-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-inline: 16px;
+    border: 1px solid #d2d6dc;
+    border-radius: 8px;
+
+    &:focus-within {
+        border-color: $color-cyan;
+        box-shadow: 0 0 0 3px rgba($color-cyan, 0.14);
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 20px;
+        display: grid;
+        place-items: center;
+    }
+
+    input {
+        flex: 1;
+        min-height: 50px;
+        padding-inline: 0;
+        border: 0;
+        background-color: transparent;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+}
+
+.consultation-security {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: #718096;
+    font-size: 12px;
+    line-height: normal;
+
+    &__icon {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+        display: grid;
+        place-items: center;
+    }
+}
+
+@media (max-width: 700px) {
+    .consultation-content {
+        gap: 32px;
+        padding-block: 40px 64px;
+    }
+
+    .consultation-heading {
+        h1 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+    }
+
+    .consultation-form {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 460px) {
+    .consultation-form {
+        padding: 24px 16px;
+    }
+
+    .consultation-security {
+        align-items: flex-start;
+    }
+}

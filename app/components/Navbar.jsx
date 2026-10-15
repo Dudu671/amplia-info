@@ -19,6 +19,7 @@ export default function Navbar() {
           </NavLink>
           <NavLink to="/financeiro">Financeiro</NavLink>
           <NavLink to="/empresarial">Empresarial</NavLink>
+          <NavLink to="/saude">Saúde</NavLink>
         </div>
       </nav>
     </header>

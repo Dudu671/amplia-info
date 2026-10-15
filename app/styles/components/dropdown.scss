@@ -47,6 +47,7 @@
         }
 
         span {
+            flex: 1;
             min-width: 0;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -58,7 +59,7 @@
             transition: transform 0.15s ease;
         }
 
-        &[aria-expanded="true"] img { transform: rotate(180deg); }
+        &[aria-expanded="true"] .dropdown__chevron { transform: rotate(180deg); }
         &--placeholder { color: #718096; }
     }
 

@@ -15,6 +15,7 @@ const services = [
     description:
       "Verifique as taxas de câmbio atualizadas em tempo real para conversão de moedas estrangeiras oficiais.",
     Icon: CoinsIcon,
+    to: "/financeiro/consulta-cambio",
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const services = [
     description:
       "Consulte o preço médio de mercado de carros, motos e caminhões novos ou usados cadastrados no Brasil.",
     Icon: CarIcon,
+    to: "/financeiro/consulta-fipe",
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const services = [
     description:
       "Consulte a listagem e a situação de autorização de corretoras e distribuidoras habilitadas pela CVM.",
     Icon: BuildingIcon,
+    to: "/financeiro/consulta-corretoras",
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const services = [
     description:
       "Verifique a lista de bancos cadastrados, códigos de compensação bancária e instituições financeiras ativas.",
     Icon: LockIcon,
+    to: "/financeiro/consulta-bancos",
   },
 ];
 
@@ -72,12 +76,13 @@ export default function Financeiro() {
         </header>
 
         <div className="financial-services-grid">
-          {services.map(({ id, title, Icon, description }) => (
+          {services.map(({ id, title, Icon, description, to }) => (
             <ServiceCard
               key={id}
               title={title}
               Icon={Icon}
               description={description}
+              to={to}
             />
           ))}
         </div>

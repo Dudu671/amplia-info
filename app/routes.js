@@ -4,6 +4,10 @@ export default [
   layout("pages/layout.jsx", [
     index("pages/home.jsx"),
     route("financeiro", "pages/financeiro.jsx"),
+    route("financeiro/consulta-cambio", "pages/consulta-cambio.jsx"),
+    route("financeiro/consulta-fipe", "pages/consulta-fipe.jsx"),
+    route("financeiro/consulta-corretoras", "pages/consulta-corretoras.jsx"),
+    route("financeiro/consulta-bancos", "pages/consulta-bancos.jsx"),
     route("sobre", "pages/sobre.jsx"),
     route("empresarial", "pages/empresarial.jsx"),
     route("empresarial/consulta-cnpj", "pages/consulta-cnpj.jsx"),

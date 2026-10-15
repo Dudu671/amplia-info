@@ -1,0 +1,27 @@
+@use "../variables" as *;
+
+.consultation-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-block: 16px;
+    overflow-x: auto;
+    color: #718096;
+    font-size: 12px;
+    line-height: normal;
+    white-space: nowrap;
+
+    a {
+        color: #007ea7;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+    }
+
+    strong {
+        color: #1a202c;
+        font-weight: 600;
+    }
+}
