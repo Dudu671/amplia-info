@@ -1,9 +1,10 @@
+import { Link } from "react-router";
 import "../styles/components/footer.scss";
 
 const footerLinks = [
   {
     title: "Serviços",
-    links: ["Consulta CPF", "Cadastro Empresarial", "Rede de Hospitais"],
+    links: ["Consulta CPF", "Cadastro Empresarial", "Rede de Hospitais", "Geográfico"],
   },
   {
     title: "Legislação",
@@ -36,7 +37,7 @@ export default function Footer() {
             <ul>
               {links.map((link) => (
                 <li key={link}>
-                  <a href="#categorias">{link}</a>
+                  {link === "Geográfico" ? <Link to="/geografico">{link}</Link> : <a href="#categorias">{link}</a>}
                 </li>
               ))}
             </ul>

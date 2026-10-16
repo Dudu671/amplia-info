@@ -1,0 +1,107 @@
+@use "../pages/geografico-variables" as *;
+
+.geographic-footer {
+    background: $color-footer;
+
+    .site-footer { background: inherit; }
+
+    .footer-content {
+        grid-template-columns: 320px auto auto auto;
+        justify-content: space-between;
+        padding-block: 64px 48px;
+    }
+
+    &__bottom { padding-bottom: 40px; }
+
+    &__divider {
+        height: 1px;
+        background: url("/assets/geografico/consultas/footer-divider.svg") repeat-x;
+    }
+
+    &--weather &__divider { background-image: url("/assets/geografico/consultas/weather-footer-divider.svg"); }
+
+    &__disclaimer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-top: 48px;
+        color: #e8f1f5;
+        font-size: 12px;
+
+        p { margin: 0; font-size: inherit; }
+        > div { display: flex; gap: 16px; }
+    }
+
+    &--detail {
+        padding: 48px max(40px, calc((100% - 1200px) / 2));
+
+        .footer-content {
+            width: 100%;
+            grid-template-columns: 1.4fr 1fr auto;
+            gap: 32px;
+            padding: 0;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            h2 { margin-bottom: 16px; font-size: 18px; line-height: 28px; letter-spacing: 0; }
+            p { max-width: 448px; font-size: 14px; line-height: 22.75px; }
+        }
+
+        .footer-links {
+            h2 { margin-bottom: 16px; font-size: 14px; line-height: 20px; letter-spacing: 1.4px; }
+            ul { gap: 8px; }
+        }
+
+        p,
+        li { color: rgba($color-white, 0.6); }
+        li { font-size: 14px; line-height: 20px; }
+    }
+
+    &__social {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 24px;
+
+        > div { display: flex; gap: 16px; }
+        > div span { width: 32px; height: 32px; display: grid; place-items: center; border-radius: $radius-pill; background: rgba($color-white, 0.05); }
+        > a { display: flex; align-items: center; gap: 8px; color: rgba($color-white, 0.3); font-size: 12px; line-height: 16px; }
+        > a img { transform: rotate(180deg); }
+    }
+
+    &__legal {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-top: 32px;
+        border-top: 1px solid rgba($color-white, 0.05);
+        color: rgba($color-white, 0.4);
+        font-size: 12px;
+        line-height: 16px;
+
+        > div { display: flex; gap: 24px; }
+    }
+}
+
+@media (max-width: 850px) {
+    .geographic-footer .footer-content { grid-template-columns: repeat(3, 1fr); }
+    .geographic-footer--detail {
+        .footer-content { grid-template-columns: 1fr 1fr; }
+        .footer-brand { grid-column: auto; }
+    }
+    .geographic-footer__social { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+@media (max-width: 700px) {
+    .geographic-footer__disclaimer { align-items: flex-start; flex-direction: column; padding-top: 32px; }
+    .geographic-footer--detail { padding: 40px 20px; }
+    .geographic-footer__legal { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 560px) {
+    .geographic-footer .footer-content { grid-template-columns: 1fr; }
+    .geographic-footer__social { grid-column: auto; }
+}

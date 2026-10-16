@@ -25,6 +25,7 @@ npm run build
 - A pesquisa de hospitais depende de `VITE_HOSPITAIS_API_URL`. Sem configuração, a tela informa que a pesquisa está indisponível.
 - As telas financeiras estão preparadas para a etapa de integração. As ações indisponíveis ficam desabilitadas e identificadas na interface.
 - Na FIPE, o tipo de veículo pode ser selecionado. Marcas, modelos e anos dependem da integração e ficam desabilitados.
+- Em Geográfico, as telas de busca de CEP, detalhe do CEP e previsão CPTEC reproduzem o protótipo do Figma. Os resultados estão identificados como exemplos; a integração dessas consultas com as APIs será feita em uma próxima etapa. A seleção de cidades na busca de CEP reutiliza a API do IBGE.
 
 ## Configuração da pesquisa de hospitais
 

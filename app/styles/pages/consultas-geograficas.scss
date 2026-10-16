@@ -1,0 +1,165 @@
+@use "geografico-variables" as *;
+
+.geographic-shell {
+    background: $color-consultation-surface;
+    color: $color-heading;
+
+    .site-header {
+        background: $color-heading;
+
+        .navbar { min-height: 80px; }
+        .navbar-links { height: 80px; gap: 32px; }
+        .navbar-links a.active::after { bottom: 23px; }
+        .brand { font-size: 16px; letter-spacing: 0; gap: 12px; }
+        .brand > span:last-child span { color: $color-white; }
+    }
+    .consultation-breadcrumb { line-height: 18px; }
+}
+
+.geographic-consultation {
+    background: $color-consultation-surface;
+
+    .consultation-heading h1 { line-height: 45px; }
+    .consultation-heading p { line-height: 24px; }
+    .consultation-form { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
+    .consultation-field label { line-height: 21px; }
+    .consultation-field .dropdown__trigger { min-height: 58px; line-height: 24px; box-shadow: none; }
+    .consultation-field .dropdown__trigger:disabled { color: $color-placeholder; background: $color-white; }
+    .consultation-field .consultation-input { min-height: 58px; }
+    .consultation-submit { min-height: 56px; line-height: 24px; }
+    .consultation-security { line-height: 15px; }
+    .consultation-form__divider { background-repeat: repeat-x; }
+    .consultation-content > .consultation-notice { width: min(600px, 100%); margin-block: -16px; }
+
+    &--weather {
+        .consultation-heading h1 { line-height: normal; }
+        .consultation-heading p { line-height: normal; }
+        .consultation-field label { line-height: normal; }
+        .consultation-field .consultation-input { min-height: 52px; }
+        .consultation-submit { min-height: 52px; line-height: normal; }
+    }
+}
+
+.cep-preview {
+    width: min(600px, 100%);
+    color: $color-secondary;
+
+    h2 { margin: 0 0 8px; color: $color-heading; font-size: 18px; }
+    p { margin: 0 0 16px; font-size: 14px; }
+    a {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px;
+        border: 1px solid $color-border;
+        border-radius: 12px;
+        background: $color-white;
+        font-size: 14px;
+
+        &:hover { border-color: $color-cyan; }
+        &:focus-visible { outline: 3px solid $color-cyan; outline-offset: 3px; }
+    }
+    strong { color: $color-heading; font-size: 20px; }
+    &__action { color: #007ea7; font-weight: 600; }
+}
+
+.geographic-shell .site-header--cep-detail {
+    border: 0;
+
+    .navbar { width: calc(100% - 80px); min-height: 88px; }
+}
+
+.cep-header-status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+
+    span { width: 6px; height: 6px; border-radius: 50%; background: $color-success; }
+}
+
+.cep-detail-page { padding: 48px 40px; }
+.cep-detail-content {
+    width: min(600px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-inline: auto;
+}
+
+.cep-detail-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    h1 { margin: 0; color: $color-heading; font-size: 36px; font-weight: 800; line-height: 40px; }
+    p { margin: 8px 0 0; color: $color-placeholder; font-size: 18px; line-height: 28px; }
+}
+
+.cep-detail-back {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    color: #007ea7;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+
+    &:hover { text-decoration: underline; }
+}
+
+.cep-detail-privacy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding-block: 16px;
+    border-top: 1px solid rgba(210, 214, 220, 0.5);
+
+    img { flex-shrink: 0; }
+    p { margin: 0; color: $color-placeholder; font-size: 12px; line-height: 16px; }
+}
+
+
+.geographic-consultation--cep {
+    .consultation-form__divider { background-image: url("/assets/geografico/consultas/cep-divider.svg"); }
+    .consultation-security__icon { background: url("/assets/geografico/consultas/cep-lock.svg") no-repeat center; }
+    .consultation-security__icon img { visibility: hidden; }
+    .dropdown__chevron { display: none; }
+    .dropdown__trigger::after {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        content: "";
+        background: url("/assets/geografico/consultas/cep-chevron.svg") no-repeat center;
+    }
+    .dropdown__trigger[aria-expanded="true"]::after { transform: rotate(180deg); }
+}
+
+.geographic-consultation--weather {
+    .consultation-form__divider { background-image: url("/assets/geografico/consultas/weather-divider.svg"); }
+}
+
+@media (max-width: 850px) {
+    .geographic-shell .site-header .navbar { flex-wrap: wrap; gap: 8px 24px; padding-top: 12px; }
+    .geographic-shell .site-header .navbar-links { height: auto; min-height: 48px; flex-wrap: wrap; gap: 18px; }
+    .geographic-shell .site-header .navbar-links a { min-height: 48px; }
+    .geographic-shell .site-header .navbar-links a.active::after { bottom: 10px; }
+}
+
+@media (max-width: 700px) {
+    .geographic-consultation .consultation-heading h1 { font-size: 30px; line-height: 1.25; }
+    .geographic-consultation .consultation-heading p { font-size: 15px; line-height: 1.5; }
+    .cep-detail-page { padding: 32px 20px; }
+    .geographic-shell .site-header--cep-detail .navbar { width: calc(100% - 40px); padding-block: 16px; }
+    .cep-detail-heading h1 { font-size: 30px; }
+    .cep-detail-heading p { font-size: 16px; }
+}
+
+@media (max-width: 460px) {
+    .geographic-shell .site-header .navbar-links { gap: 14px; }
+}
