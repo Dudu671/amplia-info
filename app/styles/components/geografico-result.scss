@@ -1,0 +1,144 @@
+@use "../pages/geografico-variables" as *;
+
+.geographic-result {
+    width: min(600px, 100%);
+    padding: 24px;
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+
+        h2 {
+            margin: 0;
+            color: #071936;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    &__icon {
+        display: grid;
+        flex-shrink: 0;
+        place-items: center;
+    }
+
+    &__badge {
+        margin-left: auto;
+        color: $color-placeholder;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+
+    &__note {
+        margin: 16px 0 0 54px;
+        color: $color-placeholder;
+        font-size: 12px;
+    }
+
+    &__details {
+        display: grid;
+        gap: 16px;
+        margin: 16px 0 0;
+        padding-left: 54px;
+        color: $color-secondary;
+        font-size: 13px;
+        line-height: normal;
+
+        div {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        dt {
+            flex-shrink: 0;
+            font-weight: 600;
+
+            &::after {
+                content: ":";
+            }
+        }
+
+        dd {
+            margin: 0;
+            overflow-wrap: anywhere;
+            color: #1a202c;
+        }
+    }
+}
+
+.geographic-result--striped {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    .geographic-result__header {
+        gap: 12px;
+        padding: 24px;
+        border-color: $color-border;
+
+        h2 { color: $color-heading; line-height: 24px; }
+    }
+
+    .geographic-result__icon {
+        width: 32px;
+        height: 32px;
+        border-radius: $radius-pill;
+        background: rgba($color-success, 0.1);
+    }
+
+    .geographic-result__details {
+        gap: 0;
+        margin: 0;
+        padding: 0;
+
+        > div {
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 20px 32px;
+
+            &:nth-child(even) { background: $color-consultation-surface; }
+        }
+
+        dt {
+            color: $color-placeholder;
+            font-size: 14px;
+            line-height: 20px;
+            text-transform: uppercase;
+
+            &::after { content: none; }
+        }
+
+        dd { color: $color-heading; font-size: 16px; font-weight: 500; line-height: 24px; text-align: right; }
+    }
+}
+
+@media (max-width: 700px) {
+    .geographic-result--striped {
+        .geographic-result__header { flex-wrap: wrap; padding: 20px; }
+        .geographic-result__badge { width: 100%; margin-left: 0; }
+        .geographic-result__details > div { padding: 20px; }
+    }
+}
+
+@media (max-width: 460px) {
+    .geographic-result__details {
+        padding-left: 0;
+    }
+
+    .geographic-result__note { margin-left: 0; }
+}

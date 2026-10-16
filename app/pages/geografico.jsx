@@ -13,6 +13,7 @@ const services = [
     description:
       "Consulte interferências e efeitos de tempo em tempo real fornecidos pelo Centro de Previsão de Tempo e Estudos Climáticos.",
     Icon: CloudIcon,
+    to: "/geografico/consulta-cptec",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const services = [
     description:
       "Busque informações completas, logradouros, bairros e regiões do Brasil informando o Código de Endereçamento Postal.",
     Icon: MapPinIcon,
+    to: "/geografico/consulta-cep",
   },
 ];
 
@@ -33,7 +35,7 @@ export function meta() {
   ];
 }
 
-export default function Financeiro() {
+export default function Geografico() {
   return (
     <main className="geografico-page">
       <nav className="breadcrumb container" aria-label="Breadcrumb">
@@ -56,12 +58,13 @@ export default function Financeiro() {
         </header>
 
         <div className="geografico-services-grid">
-          {services.map(({ id, title, description, Icon }) => (
+          {services.map(({ id, title, description, Icon, to }) => (
             <ServiceCard
               key={id}
               title={title}
               Icon={Icon}
               description={description}
+              to={to}
             />
           ))}
         </div>

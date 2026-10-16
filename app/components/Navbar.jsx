@@ -18,6 +18,7 @@ export default function Navbar() {
             Início
           </NavLink>
           <NavLink to="/financeiro">Financeiro</NavLink>
+          <NavLink to="/geografico">Geográfico</NavLink>
           <NavLink to="/empresarial">Empresarial</NavLink>
           <NavLink to="/saude">Saúde</NavLink>
         </div>

@@ -16,4 +16,9 @@ export default [
     route("saude", "pages/saude.jsx"),
     route("saude/hospitais", "pages/hospitais.jsx"),
   ]),
+  layout("pages/geografico-layout.jsx", [
+    route("geografico/consulta-cep", "pages/consulta-cep.jsx"),
+    route("geografico/consulta-cep/detalhe", "pages/detalhe-cep.jsx"),
+    route("geografico/consulta-cptec", "pages/consulta-cptec.jsx"),
+  ]),
 ];
