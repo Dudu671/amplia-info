@@ -32,8 +32,9 @@ export default function DetalheCep() {
                         <p>Detalhes do Código de Endereçamento Postal</p>
                     </div>
                 </header>
-                <GeograficoResult title="Informações Geográficas" details={details} icon={`${assets}/detail-lock.svg`}
-                    variant="striped" badge="Dados de exemplo" />
+                <GeograficoResult title="Informações Geográficas" details={details} icon="/assets/geografico/map-pin.svg">
+                    <p className="geographic-result__note">Dados de exemplo · integração em breve</p>
+                </GeograficoResult>
                 <div className="cep-detail-privacy">
                     <img src={`${assets}/privacy-lock.svg`} alt="" />
                     <p>Dados protegidos em conformidade com a LGPD e o Marco Civil da Internet.</p>

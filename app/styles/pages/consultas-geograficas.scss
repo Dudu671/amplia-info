@@ -35,8 +35,8 @@
         .consultation-heading h1 { line-height: normal; }
         .consultation-heading p { line-height: normal; }
         .consultation-field label { line-height: normal; }
-        .consultation-field .consultation-input { gap: 0; min-height: 52px; }
-        .consultation-submit { min-height: 51px; line-height: normal; }
+        .consultation-field .consultation-input { min-height: 52px; }
+        .consultation-submit { min-height: 52px; line-height: normal; }
     }
 }
 
@@ -82,7 +82,7 @@
 
 .cep-detail-page { padding: 48px 40px; }
 .cep-detail-content {
-    width: min(800px, 100%);
+    width: min(600px, 100%);
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -142,8 +142,6 @@
 
 .geographic-consultation--weather {
     .consultation-form__divider { background-image: url("/assets/geografico/consultas/weather-divider.svg"); }
-    .consultation-security__icon { background: url("/assets/geografico/consultas/weather-lock.svg") no-repeat center; }
-    .consultation-security__icon img { visibility: hidden; }
 }
 
 @media (max-width: 850px) {
