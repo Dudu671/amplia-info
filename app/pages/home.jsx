@@ -74,7 +74,7 @@ export default function Home() {
 
 const categories = [
   { title: "Financeiro", Icon: DollarIcon, to: "/financeiro" },
+  { title: "Geografia", Icon: GlobeIcon, to: "/geografico" },
   { title: "Empresarial", Icon: BuildingIcon, to: "/empresarial" },
-  { title: "Geografia", Icon: GlobeIcon },
   { title: "Saúde", Icon: HeartIcon, to: "/saude" },
 ];

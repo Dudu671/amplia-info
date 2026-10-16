@@ -4,6 +4,7 @@ export default [
   layout("pages/layout.jsx", [
     index("pages/home.jsx"),
     route("financeiro", "pages/financeiro.jsx"),
+    route("geografico", "pages/geografico.jsx"),
     route("financeiro/consulta-cambio", "pages/consulta-cambio.jsx"),
     route("financeiro/consulta-fipe", "pages/consulta-fipe.jsx"),
     route("financeiro/consulta-corretoras", "pages/consulta-corretoras.jsx"),
