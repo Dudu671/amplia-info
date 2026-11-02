@@ -26,7 +26,11 @@ test("não apresenta falhas de rede como resultados vazios", async () => {
 test("rejeita respostas HTTP com erro", async () => {
     mock.method(globalThis, "fetch", async () => new Response("Falha", { status: 503 }));
 
-    await assert.rejects(getJson("https://example.com/dados"), { message: "Não foi possível carregar os dados." });
+    await assert.rejects(getJson("https://example.com/dados"), (error) => {
+        assert.equal(error.message, "Não foi possível carregar os dados.");
+        assert.equal(error.status, 503);
+        return true;
+    });
 });
 
 test("rejeita JSON inválido sem expor a mensagem técnica", async () => {
