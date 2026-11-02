@@ -102,7 +102,7 @@ export async function runDailyHospitalUpdate({ update = updateHospitalIndex, sle
         try { await update(); } catch (error) { if (once) throw error; }
         if (once) return;
         await sleep(DAY);
-    } while (true);
+    } while (!once);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

@@ -19,6 +19,10 @@ export default defineConfig([
     },
   },
   {
+    files: ['app/**/*.server.js', 'scripts/**/*.js', 'tests/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['app/pages/**/*.jsx'],
     rules: {
       'react-refresh/only-export-components': ['error', { allowExportNames: ['meta'] }],

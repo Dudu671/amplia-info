@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "react-router dev",
+    "dev": "node --env-file-if-exists=.env.local scripts/hospitais-runtime.js dev",
     "build": "react-router build",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "node --env-file-if-exists=.env.local scripts/hospitais-runtime.js start",
     "lint": "eslint .",
     "test": "node --test",
     "hospitais:index": "node --env-file-if-exists=.env.local scripts/update-hospitais-index.js",
