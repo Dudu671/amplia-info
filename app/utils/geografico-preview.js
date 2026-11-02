@@ -7,10 +7,3 @@ export const cepPreview = {
     state: "SP",
     ddd: "11",
 };
-
-export const weatherPreview = [
-    { label: "Cidade", value: "São Paulo/SP" },
-    { label: "Temp", value: "22°C" },
-    { label: "Condição", value: "Nublado" },
-    { label: "Máx/Mín", value: "25/16°C" },
-];
