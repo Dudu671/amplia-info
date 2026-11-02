@@ -40,12 +40,13 @@
     }
 }
 
-.cep-preview {
+.cep-results {
     width: min(600px, 100%);
     color: $color-secondary;
 
     h2 { margin: 0 0 8px; color: $color-heading; font-size: 18px; }
-    p { margin: 0 0 16px; font-size: 14px; }
+    > p { margin: 0 0 16px; font-size: 14px; }
+    ul { display: grid; gap: 12px; margin: 16px 0 0; padding: 0; list-style: none; }
     a {
         display: flex;
         flex-direction: column;

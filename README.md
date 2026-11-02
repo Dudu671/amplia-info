@@ -26,7 +26,7 @@ npm run build
 - Bancos, corretoras e câmbio consultam a Brasil API. O comportamento de cada uma está em [docs](docs/README.md).
 - A consulta FIPE usa a Brasil API. O comportamento está em [docs/fipe.md](docs/fipe.md).
 - A previsão CPTEC consulta a Brasil API. O comportamento está em [docs/cptec.md](docs/cptec.md).
-- Em Geográfico, as telas de busca de CEP e detalhe do CEP reproduzem o protótipo do Figma. Os resultados estão identificados como exemplos; a integração dessas consultas será feita em uma próxima etapa. A seleção de cidades na busca de CEP reutiliza a API do IBGE.
+- A busca de CEP consulta a ViaCEP. O comportamento está em [docs/cep.md](docs/cep.md). A seleção de cidades reutiliza a API do IBGE.
 
 ## Configuração da pesquisa de hospitais
 

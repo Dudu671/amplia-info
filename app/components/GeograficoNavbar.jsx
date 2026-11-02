@@ -12,7 +12,7 @@ export default function GeograficoNavbar({ detail = false }) {
                     <FavIcon />
                     <span>Amplia <span>Info</span></span>
                 </NavLink>
-                <p className="cep-header-status">Prévia do layout <span aria-hidden="true" /></p>
+                <p className="cep-header-status">Consulta de CEP <span aria-hidden="true" /></p>
             </nav>
         </header>
     );
