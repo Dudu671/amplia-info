@@ -25,7 +25,8 @@ npm run build
 - A pesquisa de hospitais depende de `VITE_HOSPITAIS_API_URL`. Sem configuração, a tela informa que a pesquisa está indisponível.
 - Bancos, corretoras e câmbio consultam a Brasil API. O comportamento de cada uma está em [docs](docs/README.md).
 - A consulta FIPE usa a Brasil API. O comportamento está em [docs/fipe.md](docs/fipe.md).
-- Em Geográfico, as telas de busca de CEP, detalhe do CEP e previsão CPTEC reproduzem o protótipo do Figma. Os resultados estão identificados como exemplos; a integração dessas consultas com as APIs será feita em uma próxima etapa. A seleção de cidades na busca de CEP reutiliza a API do IBGE.
+- A previsão CPTEC consulta a Brasil API. O comportamento está em [docs/cptec.md](docs/cptec.md).
+- Em Geográfico, as telas de busca de CEP e detalhe do CEP reproduzem o protótipo do Figma. Os resultados estão identificados como exemplos; a integração dessas consultas será feita em uma próxima etapa. A seleção de cidades na busca de CEP reutiliza a API do IBGE.
 
 ## Configuração da pesquisa de hospitais
 
