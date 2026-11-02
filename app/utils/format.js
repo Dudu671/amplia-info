@@ -23,3 +23,17 @@ export function formatBankCode(code) {
     if (code == null || code === "") return "Não informado";
     return String(code).padStart(3, "0");
 }
+
+export function formatPhoneNumber(value) {
+    const phone = String(value ?? "").trim();
+    if (!phone || !/^\+?[\d\s().-]+$/.test(phone)) return phone;
+
+    let digits = phone.replace(/\D/g, "");
+    if ((digits.length === 12 || digits.length === 13) && digits.startsWith("55")) digits = digits.slice(2);
+
+    if (digits.length === 11) return digits.replace(/^(\d{2})(\d)(\d{4})(\d{4})$/, "($1) $2 $3-$4");
+    if (digits.length === 10) return digits.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+    if (digits.length === 9) return digits.replace(/^(\d)(\d{4})(\d{4})$/, "$1 $2-$3");
+    if (digits.length === 8) return digits.replace(/^(\d{4})(\d{4})$/, "$1-$2");
+    return phone;
+}

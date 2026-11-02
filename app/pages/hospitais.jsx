@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router";
 import Dropdown from "../components/Dropdown";
 import HospitalCard from "../components/HospitalCard";
-import { searchHospitais } from "../services/hospitais";
+import { createHospitalSearch } from "../services/hospitais-search.js";
 import { getCitiesByState } from "../services/cidades";
 import states from "../utils/states.json";
 import "../styles/pages/hospitais.scss";
@@ -11,7 +11,6 @@ const statusMessages = {
     idle: "Use os filtros acima para pesquisar hospitais.",
     loading: "Pesquisando hospitais...",
     success: "Nenhum hospital encontrado para os filtros informados.",
-    error: "Não foi possível realizar a pesquisa. Tente novamente.",
 };
 
 export function meta() {
@@ -25,9 +24,10 @@ export default function Hospitais() {
     const [filters, setFilters] = useState({ name: "", state: "", city: "" });
     const [cities, setCities] = useState([]);
     const [cityStatus, setCityStatus] = useState("idle");
-    const [hospitals, setHospitals] = useState([]);
-    const [status, setStatus] = useState("idle");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [search] = useState(() => createHospitalSearch());
+    const { items: hospitals, status, error: errorMessage, nextCursor, indexDate, loadingMore } = useSyncExternalStore(search.subscribe, search.getSnapshot, search.getSnapshot);
+
+    useEffect(() => () => search.cancel(), [search]);
 
     useEffect(() => {
         if (!filters.state) return;
@@ -38,10 +38,10 @@ export default function Hospitais() {
             try {
                 const results = await getCitiesByState(filters.state, controller.signal);
                 if (controller.signal.aborted) return;
-                setCities(results);
+                setCities(results.map((city) => ({ ...city, value: String(city.id) })));
                 setCityStatus("success");
             } catch (error) {
-                if (error.name === "AbortError") return;
+                if (controller.signal.aborted || error.name === "AbortError") return;
                 setCities([]);
                 setCityStatus("error");
             }
@@ -67,22 +67,10 @@ export default function Hospitais() {
         setFilters((currentFilters) => ({ ...currentFilters, city }));
     }
 
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
         if (status === "loading") return;
-        setStatus("loading");
-        setHospitals([]);
-        setErrorMessage("");
-
-        try {
-            const results = await searchHospitais(filters);
-            setHospitals(results);
-            setStatus("success");
-        } catch (error) {
-            setHospitals([]);
-            setErrorMessage(error.message);
-            setStatus("error");
-        }
+        search.submit(filters);
     }
 
     function getCityPlaceholder() {
@@ -106,7 +94,7 @@ export default function Hospitais() {
             <section className="hospitais-content container" aria-labelledby="hospitais-title">
                 <header className="hospitais-heading">
                     <h1 id="hospitais-title">Pesquisa de Rede de Hospitais</h1>
-                    <p>Encontre unidades de atendimento do Sistema Único de Saúde (SUS) e parceiros conveniados.</p>
+                    <p>Consulte hospitais, postos de saúde e UPAs cadastrados no CNES.</p>
                 </header>
 
                 <form className="hospitais-filters" onSubmit={handleSubmit}>
@@ -128,16 +116,24 @@ export default function Hospitais() {
                     <button type="submit" disabled={status === "loading"}>{status === "loading" ? "Pesquisando..." : "Pesquisar"}</button>
                 </form>
 
-                <section className="hospitais-results" aria-live="polite" aria-busy={status === "loading"}>
+                <section className="hospitais-results" aria-live="polite" aria-busy={status === "loading" || loadingMore}>
                     <h2>Resultados encontrados ({hospitals.length}):</h2>
+
+                    {indexDate && <p className="hospitais-results__date">Base CNES: <time dateTime={indexDate}>{new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(new Date(indexDate))}</time></p>}
 
                     {hospitals.length > 0 ? (
                         <div className="hospitais-results__list">
-                            {hospitals.map((hospital, index) => <HospitalCard key={hospital.id ?? hospital.cnes ?? index} hospital={hospital} />)}
+                            {hospitals.map((hospital) => <HospitalCard key={hospital.cnes} hospital={hospital} />)}
                         </div>
                     ) : (
-                        <p className={`hospitais-results__empty${status === "error" ? " hospitais-results__empty--error" : ""}`}>{status === "error" ? errorMessage : statusMessages[status]}</p>
+                        status !== "error" && <p className="hospitais-results__empty">{statusMessages[status]}</p>
                     )}
+
+                    {errorMessage && <p className="hospitais-results__empty hospitais-results__empty--error">{errorMessage}</p>}
+
+                    {nextCursor && <button className="hospitais-results__more" type="button" onClick={() => search.loadMore()} disabled={loadingMore}>
+                        {loadingMore ? "Carregando mais hospitais..." : "Carregar mais"}
+                    </button>}
                 </section>
             </section>
         </main>

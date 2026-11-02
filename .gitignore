@@ -28,3 +28,9 @@ Thumbs.db
 
 # Logs
 npm-debug.log*
+
+# Especificações locais
+/.specs/
+
+# Índice CNES gerado localmente
+/data/hospitais/
