@@ -1,10 +1,11 @@
+import { formatPhoneNumber } from "../utils/format.js";
 import "../styles/components/hospital-card.scss";
 
 export default function HospitalCard({ hospital }) {
     const name = hospital.name ?? hospital.nome ?? "Hospital sem nome informado";
     const type = hospital.type ?? hospital.tipo;
     const address = hospital.address ?? hospital.endereco;
-    const phone = hospital.phone ?? hospital.telefone;
+    const phone = formatPhoneNumber(hospital.phone ?? hospital.telefone);
 
     return (
         <article className="hospital-card">
@@ -28,7 +29,12 @@ export default function HospitalCard({ hospital }) {
                                 alt=""
                                 aria-hidden="true"
                             />
-                            <span>{address}</span>
+                            <a
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`${address} — abrir no Google Maps (nova aba)`}
+                            >{address}</a>
                         </div>
                     )}
 

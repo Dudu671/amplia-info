@@ -11,9 +11,11 @@
   border: 1px solid #d2d6dc;
   border-radius: 12px;
 
-  &__header {
-    display: flex;
-    align-items: center;
+  &__header,
+  &__detail {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
     gap: 16px;
   }
 
@@ -61,19 +63,35 @@
   }
 
   &__detail {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     color: #4a5568;
     font-size: 13px;
-    line-height: normal;
+    line-height: 1.5;
 
-    span {
+    span,
+    a {
       min-width: 0;
     }
 
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: $color-cyan-hover;
+      }
+
+      &:focus-visible {
+        outline: 3px solid rgba($color-cyan, 0.35);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+    }
+
     img {
-      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      justify-self: center;
     }
   }
 }
