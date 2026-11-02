@@ -7,7 +7,8 @@ As consultas partem do navegador, sem chave de API. O cliente HTTP comum está e
 | [Bancos](bancos.md) | Integrada | Brasil API |
 | [Corretoras](corretoras.md) | Integrada | Brasil API |
 | [Câmbio](cambio.md) | Integrada | Brasil API |
+| [FIPE](fipe.md) | Integrada | Brasil API |
 | Cidades | Integrada antes desta etapa | IBGE |
-| FIPE, CNPJ, domínio, CPTEC, CEP e hospitais | Pendente | Documentação entra junto com cada integração |
+| CNPJ, domínio, CPTEC, CEP e hospitais | Pendente | Documentação entra junto com cada integração |
 
 Cidades continuam em `app/services/cidades.js`, na API de localidades do IBGE.
