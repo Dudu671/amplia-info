@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { getJson } from "./http.js";
-import { loadHospitalIndex } from "./hospitais-index.server.js";
+import { loadRuntimeHospitalIndex } from "./hospitais-runtime-index.server.js";
 import { HOSPITAIS_ERROR, HOSPITAIS_PAGE_SIZE, HOSPITAIS_TYPES, HOSPITAIS_UNAVAILABLE,
     filterHospitalCandidates, normalizeCnes, normalizeHospitalFilters, UF_CODES } from "./hospitais-domain.js";
 
@@ -47,7 +47,7 @@ async function fetchDetail(cnes, signal) {
     return getJson(`${API}/${cnes}`, { signal, errorMessage: HOSPITAIS_ERROR });
 }
 
-export async function searchHospitalPage(input, { cursor, signal, loadIndex = loadHospitalIndex,
+export async function searchHospitalPage(input, { cursor, signal, loadIndex = loadRuntimeHospitalIndex,
     getDetail = fetchDetail, now = Date.now(), timeoutMs = 30000 } = {}) {
     const filters = normalizeHospitalFilters(input);
     const position = cursor ? readCursor(cursor, filters, now) : null;

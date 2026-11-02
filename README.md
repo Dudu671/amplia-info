@@ -38,7 +38,15 @@ Para preparar ou atualizar a base antes de iniciar o servidor:
 npm run hospitais:index
 ```
 
-O índice fica em `data/hospitais/`, ignorado pelo Git. Copie `.env.example` para `.env.local` para personalizar o diretório com `HOSPITAIS_INDEX_DIR`. Em produção ele precisa apontar para um volume persistente gravável. O armazenamento contém dados públicos, fora de `public/`, e não deve ser servido como arquivo estático.
+O índice fica em `data/hospitais/`, ignorado pelo Git. Copie `.env.example` para `.env.local` para personalizar o diretório com `HOSPITAIS_INDEX_DIR`. Em servidores Node com atualização diária pelo worker, ele precisa apontar para um volume persistente gravável. O armazenamento contém dados públicos, fora de `public/`, e não deve ser servido como arquivo estático.
+
+### Deploy na Vercel
+
+Use o preset React Router, Node.js 24 e o comando de build `npm run build`. Durante o build na Vercel (`VERCEL=1`), o índice CNES é atualizado e uma cópia validada e compactada é incluída no bundle do servidor. Se uma atualização falhar, uma base válida já disponível no ambiente de build pode ser reutilizada; sem nenhuma base válida, o build falha para impedir um deploy com a pesquisa quebrada.
+
+A API usa a cópia incluída no servidor quando não encontra um índice válido em disco. Isso dispensa volume persistente ou um novo serviço de armazenamento para consultar hospitais. A base não é incluída nos arquivos do navegador, e nenhuma pesquisa baixa o arquivo nacional do CNES. Os detalhes dos resultados continuam sendo consultados na API do Ministério.
+
+A Vercel não executa o worker de `npm start`. Nesse ambiente, a base incluída é atualizada a cada novo build; para manter atualização diária, é necessário agendar um novo deploy, por exemplo com um Deploy Hook da Vercel acionado diariamente. O worker diário permanece disponível para servidores Node com volume persistente. A data da fonte usada continua visível nos resultados.
 
 Em múltiplas instâncias, mantenha somente um atualizador: configure `HOSPITAIS_INDEX_WORKER=0` nos servidores e execute `npm run hospitais:index:watch` em um worker separado com o mesmo volume. Alternativamente agende `npm run hospitais:index` diariamente no agendador do ambiente. Os comandos carregam `.env.local`; variáveis do ambiente também são aceitas. A atualização exige acesso HTTPS ao S3 oficial, à API do Ministério e ao IBGE.
 
