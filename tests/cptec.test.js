@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, mock, test } from "node:test";
-import { chooseCities, chooseLocation, describeUv, forecastDayTitle, formatObservationTime, getPrevisao, getTemperaturaAtual, normalizeCurrentTemperature, normalizeForecast, searchCidades, weatherIconKind } from "../app/services/cptec.js";
+import { chooseCities, chooseLocation, describeUv, forecastDayTitle, formatHumidity, formatObservationTime, formatWind, getPrevisao, getTemperaturaAtual, normalizeCurrentTemperature, normalizeForecast, searchCidades, weatherIconKind } from "../app/services/cptec.js";
 
 afterEach(() => mock.restoreAll());
 
@@ -62,9 +62,26 @@ test("escolhe a cidade no estado certo e formata a temperatura atual", () => {
 
     assert.equal(chooseLocation(results, "Ouro", "SC").admin1, "Santa Catarina");
     assert.equal(chooseLocation(results, "Ouro", "BA"), null);
-    assert.deepEqual(normalizeCurrentTemperature({ current: { temperature_2m: 25.6, time: "2026-11-02T16:15" } }), {
+    assert.equal(formatHumidity(45.4), "45%");
+    assert.equal(formatWind(12.2, 40), "12 km/h NE");
+    assert.deepEqual(normalizeCurrentTemperature({
+        current: {
+            temperature_2m: 25.6,
+            time: "2026-11-02T16:15",
+            relative_humidity_2m: 45,
+            wind_speed_10m: 12.2,
+            wind_direction_10m: 40,
+            uv_index: 8.2,
+            weather_code: 0,
+        },
+    }), {
         temperature: 26,
         observedAt: "2026-11-02T16:15",
+        humidity: "45%",
+        wind: "12 km/h NE",
+        uv: { value: 8, level: "Muito Alto" },
+        condition: "Ensolarado",
+        conditionCode: "ps",
     });
     assert.equal(formatObservationTime("2026-11-02T16:15"), "16:15");
     assert.equal(normalizeCurrentTemperature({ current: {} }), null);
@@ -77,15 +94,14 @@ test("consulta a temperatura atual pelas coordenadas da cidade", async () => {
         if (urls.length === 1) {
             return Response.json({ results: [{ name: "Ribeirão Preto", country_code: "BR", admin1: "São Paulo", latitude: -21.18, longitude: -47.81 }] });
         }
-        return Response.json({ current: { temperature_2m: 25, time: "2026-11-02T16:15" } });
+        return Response.json({ current: { temperature_2m: 25, time: "2026-11-02T16:15", relative_humidity_2m: 45, wind_speed_10m: 12, wind_direction_10m: 40, uv_index: 8, weather_code: 0 } });
     });
 
-    assert.deepEqual(await getTemperaturaAtual({ nome: "Ribeirão Preto", estado: "SP" }), {
-        temperature: 25,
-        observedAt: "2026-11-02T16:15",
-    });
+    assert.equal((await getTemperaturaAtual({ nome: "Ribeirão Preto", estado: "SP" })).humidity, "45%");
     assert.match(urls[0], /geocoding-api\.open-meteo\.com/);
     assert.match(urls[1], /latitude=-21\.18&longitude=-47\.81/);
+    assert.match(urls[1], /relative_humidity_2m/);
+    assert.match(urls[1], /wind_speed_unit=kmh/);
 });
 
 test("trata cidade inexistente como lista vazia", async () => {

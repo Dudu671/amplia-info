@@ -29,11 +29,77 @@ export function chooseCities(cities, query) {
     return exact.length ? exact : named;
 }
 
+function uvLevel(value) {
+    if (value <= 2) return "Baixo";
+    if (value <= 5) return "Moderado";
+    if (value <= 7) return "Alto";
+    if (value <= 10) return "Muito Alto";
+    return "Extremo";
+}
+
 export function describeUv(index) {
     const value = Number(index);
     if (!Number.isFinite(value) || value <= 0) return null;
-    const level = value <= 2 ? "Baixo" : value <= 5 ? "Moderado" : value <= 7 ? "Alto" : value <= 10 ? "Muito Alto" : "Extremo";
-    return { value, level };
+    return { value, level: uvLevel(value) };
+}
+
+export function describeCurrentUv(index) {
+    const value = Number(index);
+    if (!Number.isFinite(value) || value < 0) return null;
+    const rounded = Math.round(value);
+    return { value: rounded, level: uvLevel(rounded) };
+}
+
+const COMPASS = ["N", "NE", "L", "SE", "S", "SO", "O", "NO"];
+const WEATHER_CODES = new Map([
+    [0, ["Ensolarado", "ps"]],
+    [1, ["Ensolarado", "ps"]],
+    [2, ["Parcialmente Nublado", "pn"]],
+    [3, ["Nublado", "n"]],
+    [45, ["Nevoeiro", "n"]],
+    [48, ["Nevoeiro", "n"]],
+    [51, ["Chuvisco", "c"]],
+    [53, ["Chuvisco", "c"]],
+    [55, ["Chuvisco", "c"]],
+    [56, ["Chuvisco", "c"]],
+    [57, ["Chuvisco", "c"]],
+    [61, ["Chuva", "c"]],
+    [63, ["Chuva", "c"]],
+    [65, ["Chuva", "c"]],
+    [66, ["Chuva", "c"]],
+    [67, ["Chuva", "c"]],
+    [71, ["Neve", "n"]],
+    [73, ["Neve", "n"]],
+    [75, ["Neve", "n"]],
+    [77, ["Neve", "n"]],
+    [80, ["Pancadas de Chuva", "pp"]],
+    [81, ["Pancadas de Chuva", "pp"]],
+    [82, ["Pancadas de Chuva", "pp"]],
+    [85, ["Neve", "n"]],
+    [86, ["Neve", "n"]],
+    [95, ["Tempestade", "t"]],
+    [96, ["Tempestade", "t"]],
+    [99, ["Tempestade", "t"]],
+]);
+
+export function describeWeatherCode(code) {
+    const item = WEATHER_CODES.get(Number(code));
+    if (!item) return null;
+    return { label: item[0], code: item[1] };
+}
+
+export function formatHumidity(value) {
+    const humidity = Number(value);
+    if (!Number.isFinite(humidity)) return null;
+    return `${Math.round(humidity)}%`;
+}
+
+export function formatWind(speed, direction) {
+    const value = Number(speed);
+    const degrees = Number(direction);
+    if (!Number.isFinite(value) || !Number.isFinite(degrees)) return null;
+    const point = COMPASS[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
+    return `${Math.round(value)} km/h ${point}`;
 }
 
 export function shortCondition(description) {
@@ -54,10 +120,20 @@ export function chooseLocation(results, cityName, state) {
 }
 
 export function normalizeCurrentTemperature(data) {
-    const temperature = Number(data?.current?.temperature_2m);
-    const observedAt = data?.current?.time;
+    const current = data?.current;
+    const temperature = Number(current?.temperature_2m);
+    const observedAt = current?.time;
     if (!Number.isFinite(temperature) || !observedAt) return null;
-    return { temperature: Math.round(temperature), observedAt: String(observedAt) };
+    const weather = describeWeatherCode(current.weather_code);
+    return {
+        temperature: Math.round(temperature),
+        observedAt: String(observedAt),
+        humidity: formatHumidity(current.relative_humidity_2m),
+        wind: formatWind(current.wind_speed_10m, current.wind_direction_10m),
+        uv: describeCurrentUv(current.uv_index),
+        condition: weather?.label ?? null,
+        conditionCode: weather?.code ?? null,
+    };
 }
 
 export function formatObservationTime(observedAt) {
@@ -150,7 +226,7 @@ export async function getTemperaturaAtual(city, signal) {
     const place = chooseLocation(located?.results, name, city.estado);
     if (!place) return null;
 
-    const weather = await getJson(`${FORECAST_URL}?latitude=${place.latitude}&longitude=${place.longitude}&current=temperature_2m&timezone=America%2FSao_Paulo`, {
+    const weather = await getJson(`${FORECAST_URL}?latitude=${place.latitude}&longitude=${place.longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index,weather_code&timezone=America%2FSao_Paulo&wind_speed_unit=kmh`, {
         signal,
         errorMessage: "Não foi possível consultar a temperatura atual.",
     });
