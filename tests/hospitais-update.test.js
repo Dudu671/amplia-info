@@ -6,7 +6,8 @@ import { crc32 } from "node:zlib";
 import { test } from "node:test";
 import { buildCityDictionary, readCnesArchive, runDailyHospitalUpdate, updateHospitalIndex } from "../scripts/update-hospitais-index.js";
 import { loadHospitalIndex, publishHospitalIndex } from "../app/services/hospitais-index.server.js";
-import { hospitalIndex } from "./helpers/hospitais.js";
+import { hospitalIndex, hospitalRecord } from "./helpers/hospitais.js";
+import { UF_CODES } from "../app/services/hospitais-domain.js";
 
 function archiveBuffer(content, name = "cnes_estabelecimentos.json") {
     const data = Buffer.from(content);
@@ -87,5 +88,31 @@ test("carga truncada não publica índice incompleto e dicionário IBGE rejeita 
         assert.equal((await loadHospitalIndex(undefined, directory)).version, index.version);
         assert.deepEqual(buildCityDictionary([{ id: 5300108, nome: "Brasília" }, { id: 3550308, nome: "São Paulo" }]), { 530010: "Brasília", 355030: "São Paulo" });
         assert.throws(() => buildCityDictionary([{ id: 123, nome: "Inválido" }]));
+    } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test("HOSP-27 carga nacional que perde mais de 20% dos candidatos preserva a versão anterior", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "hospitais-coverage-test-"));
+    try {
+        const previous = hospitalIndex(Array.from({ length: 20000 }, (_, i) => hospitalRecord(i + 1)));
+        await publishHospitalIndex(previous, directory);
+        const ufs = Object.values(UF_CODES);
+        // A carga ainda supera todos os mínimos nacionais: 100 mil registros,
+        // 11 mil candidatos e 27 UFs. Mesmo assim perde 45% da base anterior.
+        const active = Array.from({ length: 11000 }, (_, i) => {
+            const uf = ufs[i % ufs.length];
+            return { CO_CNES: String(i + 1), NO_FANTASIA: `Hospital ${i + 1}`, NO_RAZAO_SOCIAL: "Entidade",
+                CO_UF: uf, CO_IBGE: `${uf}0000`, TP_UNIDADE: "5", CO_MOTIVO_DESAB: "" };
+        });
+        const excluded = { ...active[0], TP_UNIDADE: "4" };
+        const archive = join(directory, "national.zip");
+        await writeFile(archive, archiveBuffer(JSON.stringify([...active, ...Array(89000).fill(excluded)])));
+        const cities = Object.fromEntries(ufs.map((uf) => [`${uf}0000`, `Município de teste ${uf}`]));
+        await assert.rejects(updateHospitalIndex({ directory, archive, sourceUpdatedAt: previous.sourceUpdatedAt,
+            types: previous.types, cities, logger: { error() {}, info() {} } }), /Cobertura CNES incompleta/);
+        const current = await loadHospitalIndex(undefined, directory);
+        assert.equal(current.version, previous.version);
+        assert.equal(current.sourceUpdatedAt, previous.sourceUpdatedAt);
+        assert.equal(current.records.length, 20000);
     } finally { await rm(directory, { recursive: true, force: true }); }
 });
