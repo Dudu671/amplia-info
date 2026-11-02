@@ -14,17 +14,15 @@ A busca exige pelo menos 3 letras. Se a API devolver mais de uma cidade, a tela 
 
 `GET https://brasilapi.com.br/api/cptec/v1/clima/previsao/{código da cidade}/6`
 
-A resposta traz até seis dias, com data, condição, mínima, máxima e índice UV. O primeiro dia define a condição, a mínima e a máxima do cartão. Os dias seguintes aparecem na tabela.
+A resposta traz até seis dias, com data, condição, mínima, máxima e índice UV. O primeiro dia define a mínima e a máxima do cartão. Os dias seguintes aparecem na tabela.
 
 O painel chama o dia de Hoje ou Amanhã quando a data corresponde. Nos demais, mostra o dia da semana. A tabela usa dia e mês.
 
-O índice UV só aparece quando vem maior que zero. A escala é a do CPTEC: até 2 baixo, até 5 moderado, até 7 alto, até 10 muito alto e, acima disso, extremo. Zero significa que o índice não foi informado.
+## Leitura atual
 
-## Temperatura atual
+O cartão em destaque mostra a leitura deste momento: temperatura, condição, umidade relativa, vento e índice UV. A previsão por cidade do CPTEC não traz esses campos. A tela localiza a cidade e consulta o Open-Meteo. O horário exibido é o da leitura.
 
-O número grande do cartão é a temperatura deste momento. A previsão por cidade do CPTEC não traz essa leitura. A tela localiza a cidade e consulta a temperatura atual no Open-Meteo. O horário exibido é o da leitura.
-
-Mínima, máxima, condição e índice UV são a previsão do primeiro dia. Se a temperatura atual não puder ser consultada, o número grande fica vazio e o restante da previsão permanece.
+A mínima e a máxima continuam sendo a previsão do primeiro dia. Se a leitura atual não puder ser consultada, esses campos ficam vazios e a previsão diária permanece. O índice UV da previsão diária só entra na resposta do CPTEC e costuma vir zerado; o valor exibido é o da leitura atual. A escala vai até 2 baixo, até 5 moderado, até 7 alto, até 10 muito alto e, acima disso, extremo.
 
 ## Código
 
