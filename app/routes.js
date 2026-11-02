@@ -1,6 +1,7 @@
 import { route, index, layout } from "@react-router/dev/routes";
 
 export default [
+  route("api/hospitais", "pages/api-hospitais.js"),
   layout("pages/layout.jsx", [
     index("pages/home.jsx"),
     route("financeiro", "pages/financeiro.jsx"),
