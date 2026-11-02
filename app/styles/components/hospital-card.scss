@@ -1,6 +1,8 @@
 @use "../variables" as *;
 
 .hospital-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -68,6 +70,10 @@
 
     span {
       min-width: 0;
+    }
+
+    img {
+      flex-shrink: 0;
     }
   }
 }
