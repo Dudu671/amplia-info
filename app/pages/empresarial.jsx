@@ -19,7 +19,7 @@ const services = [
         id: 2,
         title: "Registro BR",
         description:
-            "Consulte a disponibilidade de nomes de domínio, titularidade e status de registro com extensão '.br'.",
+            "Consulte o status de registro, o vencimento e os servidores DNS de domínios .br.",
         Icon: GlobeIcon,
         to: "/empresarial/consulta-dominio",
     },
