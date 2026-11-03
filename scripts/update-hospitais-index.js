@@ -10,6 +10,7 @@ import { streamArray } from "stream-json/streamers/stream-array.js";
 import { getJson } from "../app/services/http.js";
 import { CNES_SOURCE, INDEX_DIR, createHospitalIndex, indexCandidate, loadHospitalIndex, publishHospitalIndex } from "../app/services/hospitais-index.server.js";
 import { HOSPITAIS_TYPES } from "../app/services/hospitais-domain.js";
+import municipalitySnapshot from "../data/municipios-ibge.json" with { type: "json" };
 
 const DAY = 24 * 60 * 60 * 1000;
 const openZip = promisify(yauzl.open);
@@ -70,12 +71,16 @@ export async function updateHospitalIndex({ directory = INDEX_DIR, archive, sour
             await pipeline(response.body, createWriteStream(archive));
         }
         if (!types) {
-            const data = await getJson("https://apidadosabertos.saude.gov.br/cnes/tipounidades", { signal: AbortSignal.timeout(30000) });
+            const data = await getJson("https://apidadosabertos.saude.gov.br/cnes/tipounidades", {
+                signal: AbortSignal.timeout(30000),
+                errorMessage: "Não foi possível carregar os tipos de unidade do CNES.",
+            });
             if (!Array.isArray(data?.tipos_unidade)) throw new Error("Tipos CNES inválidos.");
             types = Object.fromEntries(data.tipos_unidade.map((type) => [Number(type.codigo_tipo_unidade), type.descricao_tipo_unidade]));
         }
         if (HOSPITAIS_TYPES.some((type) => typeof types[type] !== "string" || !types[type].trim())) throw new Error("Dicionário CNES incompleto.");
-        cities ??= buildCityDictionary(await getJson("https://servicodados.ibge.gov.br/api/v1/localidades/municipios?orderBy=nome", { signal: AbortSignal.timeout(60000) }));
+        // O catálogo oficial acompanha o código: a primeira carga também funciona sem acesso ao IBGE.
+        cities ??= buildCityDictionary(municipalitySnapshot.municipalities);
         const records = [];
         let sourceCount = 0;
         for await (const row of readCnesArchive(archive)) {
