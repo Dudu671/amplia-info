@@ -28,6 +28,14 @@ a {
   text-decoration: none;
 }
 
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
 .container {
   width: min($container-max, calc(100% - (2 * $desktop-gutter)));
   margin-inline: auto;

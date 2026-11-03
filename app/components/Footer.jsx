@@ -4,19 +4,29 @@ import "../styles/components/footer.scss";
 const footerLinks = [
   {
     title: "Serviços",
-    links: ["Consulta CPF", "Cadastro Empresarial", "Rede de Hospitais", "Geográfico"],
+    links: [
+      { label: "Consulta CNPJ", to: "/empresarial/consulta-cnpj" },
+      { label: "Cadastro Empresarial", to: "/empresarial" },
+      { label: "Rede de Hospitais", to: "/saude/hospitais" },
+      { label: "Geográfico", to: "/geografico" },
+    ],
   },
   {
     title: "Legislação",
     links: [
-      "Constituição Federal",
-      "Lei de Acesso à Informação",
-      "Privacidade e LGPD",
+      {
+        label: "Constituição Federal",
+        href: "https://www4.planalto.gov.br/legislacao/portal-legis/legislacao-1/constituicao",
+      },
+      {
+        label: "Lei de Acesso à Informação",
+        href: "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+      },
+      {
+        label: "Privacidade e LGPD",
+        href: "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.html",
+      },
     ],
-  },
-  {
-    title: "Canais",
-    links: ["Fale Conosco", "Ouvidoria Geral", "Redes Sociais Oficiais"],
   },
 ];
 
@@ -35,9 +45,9 @@ export default function Footer() {
           <section className="footer-links" key={title}>
             <h2>{title}</h2>
             <ul>
-              {links.map((link) => (
-                <li key={link}>
-                  {link === "Geográfico" ? <Link to="/geografico">{link}</Link> : <a href="#categorias">{link}</a>}
+              {links.map(({ label, to, href }) => (
+                <li key={label}>
+                  {to ? <Link to={to}>{label}</Link> : <a href={href}>{label}</a>}
                 </li>
               ))}
             </ul>
