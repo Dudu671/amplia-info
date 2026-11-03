@@ -23,7 +23,7 @@
 .footer {
   &-content {
     display: grid;
-    grid-template-columns: 2.4fr 1.45fr 1.7fr 1fr;
+    grid-template-columns: 2.4fr 1.45fr 1.7fr;
     gap: 48px;
     padding-block: 62px 66px;
   }
@@ -61,7 +61,7 @@
 @media (max-width: 850px) {
   .footer {
     &-content {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     &-brand {

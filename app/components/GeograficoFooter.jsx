@@ -10,9 +10,8 @@ const detailBrand = {
 const detailSections = [{
     title: "Links Úteis",
     links: [
-        { label: "Como funciona", to: "/geografico/consulta-cep" },
-        { label: "API para desenvolvedores" },
-        { label: "Termos de uso" },
+        { label: "Consulta CEP", to: "/geografico/consulta-cep" },
+        { label: "Previsão do Tempo", to: "/geografico/consulta-cptec" },
         { label: "Geográfico", to: "/geografico" },
     ],
 }];
@@ -31,16 +30,12 @@ export default function GeograficoFooter({ detail = false, weather = false }) {
                             <h2>{title}</h2>
                             <ul>
                                 {links.map(({ label, to }) => (
-                                    <li key={label}>{to ? <Link to={to}>{label}</Link> : <span>{label}</span>}</li>
+                                    <li key={label}><Link to={to}>{label}</Link></li>
                                 ))}
                             </ul>
                         </section>
                     ))}
                     <div className="geographic-footer__social">
-                        <div>
-                            <span aria-label="LinkedIn"><img src={`${assets}/linkedin.svg`} alt="" /></span>
-                            <span aria-label="GitHub"><img src={`${assets}/github.svg`} alt="" /></span>
-                        </div>
                         <a href="#topo"><img src={`${assets}/top.svg`} alt="" />Topo da página</a>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import "../styles/pages/home.scss";
 
-import SearchIcon from "../../public/assets/home/search.svg?react";
 import DollarIcon from "../../public/assets/home/dollar.svg?react";
 import BuildingIcon from "../../public/assets/home/building.svg?react";
 import GlobeIcon from "../../public/assets/home/globe.svg?react";
@@ -27,24 +26,6 @@ export default function Home() {
             Acesse dados governamentais de forma simplificada, transparente e
             segura em um só lugar.
           </p>
-          <form
-            className="search-form"
-            onSubmit={(event) => event.preventDefault()}
-            role="search"
-          >
-            <label className="visually-hidden" htmlFor="site-search">
-              O que você está procurando?
-            </label>
-            <SearchIcon />
-            <input
-              id="site-search"
-              type="search"
-              placeholder={
-                'O que você está procurando hoje? Ex: "Consulta CPF"'
-              }
-            />
-            <button type="submit">Buscar</button>
-          </form>
         </div>
       </section>
       <section

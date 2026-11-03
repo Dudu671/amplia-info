@@ -5,10 +5,11 @@
   background: $color-navy;
 
   &-content {
-    min-height: 336px;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 26px 0 64px;
     text-align: center;
   }
@@ -23,59 +24,9 @@
   }
 
   p {
-    margin: 17px 0 31px;
+    margin: 17px 0 0;
     color: #deebf8;
     font-size: 18px;
-  }
-}
-
-.search-form {
-  width: min(640px, 100%);
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  padding: 5px 7px 5px 24px;
-  color: #6f84a3;
-  background: $color-white;
-  border-radius: $radius-pill;
-
-  .icon {
-    flex: 0 0 auto;
-    width: 20px;
-    height: 20px;
-    margin-right: 3px;
-  }
-
-  input {
-    min-width: 0;
-    flex: 1;
-    padding: 10px 8px;
-    color: $color-text;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    font-size: 15px;
-
-    &::placeholder {
-      color: #778aa8;
-      opacity: 1;
-    }
-  }
-
-  button {
-    min-width: 96px;
-    padding: 12px 20px;
-    color: $color-white;
-    background: $color-cyan;
-    border: 0;
-    border-radius: $radius-pill;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 700;
-
-    &:hover {
-      background: $color-cyan-hover;
-    }
   }
 }
 
@@ -144,7 +95,7 @@
 @media (max-width: 800px) {
   .hero {
     &-content {
-      min-height: 310px;
+      min-height: 240px;
     }
 
     p {
@@ -164,20 +115,7 @@
     }
 
     p {
-      margin: 14px 0 25px;
-    }
-  }
-
-  .search-form {
-    padding-left: 15px;
-
-    input {
-      font-size: 13px;
-    }
-
-    button {
-      min-width: 80px;
-      padding-inline: 14px;
+      margin: 14px 0 0;
     }
   }
 
